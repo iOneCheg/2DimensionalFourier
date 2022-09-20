@@ -1,0 +1,15 @@
+G:\Ivan\Программирование\ImageFiltering\bin\Debug\ImageFiltering.exe.config
+G:\Ivan\Программирование\ImageFiltering\bin\Debug\ImageFiltering.exe
+G:\Ivan\Программирование\ImageFiltering\bin\Debug\ImageFiltering.pdb
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.csprojAssemblyReference.cache
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.MainWindow.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.Properties.Resources.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.csproj.GenerateResource.cache
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.csproj.CoreCompileInputs.cache
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.exe
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.pdb
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.InputImage.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.NoisyImage.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.SpectrImage.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.RecoveryImage.resources
+G:\Ivan\Программирование\ImageFiltering\obj\Debug\ImageFiltering.LogSpectr.resources
