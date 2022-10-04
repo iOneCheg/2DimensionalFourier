@@ -32,6 +32,16 @@
             this.button_DrawSpectrImage = new System.Windows.Forms.Button();
             this.button_Recovery = new System.Windows.Forms.Button();
             this.groupBoxInputParameters = new System.Windows.Forms.GroupBox();
+            this.buttonDrawNoisyImage = new System.Windows.Forms.Button();
+            this.groupBoxHowComplement = new System.Windows.Forms.GroupBox();
+            this.checkBoxBilinearInterpolation = new System.Windows.Forms.CheckBox();
+            this.checkBoxZeroCoplement = new System.Windows.Forms.CheckBox();
+            this.groupBoxGaussParameters = new System.Windows.Forms.GroupBox();
+            this.groupBoxInputSize = new System.Windows.Forms.GroupBox();
+            this.comboBoxMSize = new System.Windows.Forms.ComboBox();
+            this.labelM = new System.Windows.Forms.Label();
+            this.comboBoxNSize = new System.Windows.Forms.ComboBox();
+            this.labelN = new System.Windows.Forms.Label();
             this.groupBoxGaussDomeParameters = new System.Windows.Forms.GroupBox();
             this.numericUpDownSigmaY = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,24 +68,22 @@
             this.labelXShift1 = new System.Windows.Forms.Label();
             this.numericUpDownAmplitude1 = new System.Windows.Forms.NumericUpDown();
             this.labelAmplitude1 = new System.Windows.Forms.Label();
-            this.groupBoxInputSize = new System.Windows.Forms.GroupBox();
-            this.comboBoxMSize = new System.Windows.Forms.ComboBox();
-            this.labelM = new System.Windows.Forms.Label();
-            this.comboBoxNSize = new System.Windows.Forms.ComboBox();
-            this.labelN = new System.Windows.Forms.Label();
+            this.checkBoxChoiceImage = new System.Windows.Forms.CheckBox();
             this.groupBoxOutputParameters = new System.Windows.Forms.GroupBox();
             this.textBoxSignalRecoveryDelta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxSignalNoiseDelta = new System.Windows.Forms.TextBox();
             this.labelSKOSignalNoise = new System.Windows.Forms.Label();
-            this.checkBoxChoiceImage = new System.Windows.Forms.CheckBox();
             this.openFileDialogLoadImageInput = new System.Windows.Forms.OpenFileDialog();
-            this.groupBoxGaussParameters = new System.Windows.Forms.GroupBox();
-            this.groupBoxHowComplement = new System.Windows.Forms.GroupBox();
-            this.checkBoxZeroCoplement = new System.Windows.Forms.CheckBox();
-            this.checkBoxBilinearInterpolation = new System.Windows.Forms.CheckBox();
-            this.buttonDrawNoisyImage = new System.Windows.Forms.Button();
+            this.button_Restart = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDown_NoiseProcent = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownRecoveryProcent = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBoxInputParameters.SuspendLayout();
+            this.groupBoxHowComplement.SuspendLayout();
+            this.groupBoxGaussParameters.SuspendLayout();
+            this.groupBoxInputSize.SuspendLayout();
             this.groupBoxGaussDomeParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigmaY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigmaX)).BeginInit();
@@ -91,10 +99,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYShift1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXShift1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmplitude1)).BeginInit();
-            this.groupBoxInputSize.SuspendLayout();
             this.groupBoxOutputParameters.SuspendLayout();
-            this.groupBoxGaussParameters.SuspendLayout();
-            this.groupBoxHowComplement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_NoiseProcent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRecoveryProcent)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Draw
@@ -109,7 +116,8 @@
             // 
             // button_DrawSpectrImage
             // 
-            this.button_DrawSpectrImage.Location = new System.Drawing.Point(321, 651);
+            this.button_DrawSpectrImage.Enabled = false;
+            this.button_DrawSpectrImage.Location = new System.Drawing.Point(12, 600);
             this.button_DrawSpectrImage.Name = "button_DrawSpectrImage";
             this.button_DrawSpectrImage.Size = new System.Drawing.Size(145, 42);
             this.button_DrawSpectrImage.TabIndex = 3;
@@ -119,7 +127,8 @@
             // 
             // button_Recovery
             // 
-            this.button_Recovery.Location = new System.Drawing.Point(512, 651);
+            this.button_Recovery.Enabled = false;
+            this.button_Recovery.Location = new System.Drawing.Point(163, 600);
             this.button_Recovery.Name = "button_Recovery";
             this.button_Recovery.Size = new System.Drawing.Size(145, 42);
             this.button_Recovery.TabIndex = 5;
@@ -129,6 +138,10 @@
             // 
             // groupBoxInputParameters
             // 
+            this.groupBoxInputParameters.Controls.Add(this.numericUpDownRecoveryProcent);
+            this.groupBoxInputParameters.Controls.Add(this.label5);
+            this.groupBoxInputParameters.Controls.Add(this.numericUpDown_NoiseProcent);
+            this.groupBoxInputParameters.Controls.Add(this.label4);
             this.groupBoxInputParameters.Controls.Add(this.buttonDrawNoisyImage);
             this.groupBoxInputParameters.Controls.Add(this.groupBoxHowComplement);
             this.groupBoxInputParameters.Controls.Add(this.groupBoxGaussParameters);
@@ -139,6 +152,119 @@
             this.groupBoxInputParameters.TabIndex = 6;
             this.groupBoxInputParameters.TabStop = false;
             this.groupBoxInputParameters.Text = "Входные параметры";
+            // 
+            // buttonDrawNoisyImage
+            // 
+            this.buttonDrawNoisyImage.Enabled = false;
+            this.buttonDrawNoisyImage.Location = new System.Drawing.Point(267, 496);
+            this.buttonDrawNoisyImage.Name = "buttonDrawNoisyImage";
+            this.buttonDrawNoisyImage.Size = new System.Drawing.Size(145, 65);
+            this.buttonDrawNoisyImage.TabIndex = 8;
+            this.buttonDrawNoisyImage.Text = "Нарисовать зашумлённое изображение";
+            this.buttonDrawNoisyImage.UseVisualStyleBackColor = true;
+            this.buttonDrawNoisyImage.Click += new System.EventHandler(this.buttonDrawNoisyImage_Click);
+            // 
+            // groupBoxHowComplement
+            // 
+            this.groupBoxHowComplement.Controls.Add(this.checkBoxBilinearInterpolation);
+            this.groupBoxHowComplement.Controls.Add(this.checkBoxZeroCoplement);
+            this.groupBoxHowComplement.Location = new System.Drawing.Point(245, 42);
+            this.groupBoxHowComplement.Name = "groupBoxHowComplement";
+            this.groupBoxHowComplement.Size = new System.Drawing.Size(200, 71);
+            this.groupBoxHowComplement.TabIndex = 4;
+            this.groupBoxHowComplement.TabStop = false;
+            this.groupBoxHowComplement.Text = "Как дополнить изображение?";
+            // 
+            // checkBoxBilinearInterpolation
+            // 
+            this.checkBoxBilinearInterpolation.AutoSize = true;
+            this.checkBoxBilinearInterpolation.Location = new System.Drawing.Point(6, 43);
+            this.checkBoxBilinearInterpolation.Name = "checkBoxBilinearInterpolation";
+            this.checkBoxBilinearInterpolation.Size = new System.Drawing.Size(161, 17);
+            this.checkBoxBilinearInterpolation.TabIndex = 1;
+            this.checkBoxBilinearInterpolation.Text = "Билинейная интерполяция";
+            this.checkBoxBilinearInterpolation.UseVisualStyleBackColor = true;
+            this.checkBoxBilinearInterpolation.CheckedChanged += new System.EventHandler(this.checkBoxBilinearInterpolation_CheckedChanged);
+            // 
+            // checkBoxZeroCoplement
+            // 
+            this.checkBoxZeroCoplement.AutoSize = true;
+            this.checkBoxZeroCoplement.Location = new System.Drawing.Point(6, 20);
+            this.checkBoxZeroCoplement.Name = "checkBoxZeroCoplement";
+            this.checkBoxZeroCoplement.Size = new System.Drawing.Size(122, 17);
+            this.checkBoxZeroCoplement.TabIndex = 0;
+            this.checkBoxZeroCoplement.Text = "Дополнить нулями";
+            this.checkBoxZeroCoplement.UseVisualStyleBackColor = true;
+            this.checkBoxZeroCoplement.CheckedChanged += new System.EventHandler(this.checkBoxZeroCoplement_CheckedChanged);
+            // 
+            // groupBoxGaussParameters
+            // 
+            this.groupBoxGaussParameters.Controls.Add(this.groupBoxInputSize);
+            this.groupBoxGaussParameters.Controls.Add(this.groupBoxGaussDomeParameters);
+            this.groupBoxGaussParameters.Controls.Add(this.button_Draw);
+            this.groupBoxGaussParameters.Location = new System.Drawing.Point(6, 19);
+            this.groupBoxGaussParameters.Name = "groupBoxGaussParameters";
+            this.groupBoxGaussParameters.Size = new System.Drawing.Size(233, 557);
+            this.groupBoxGaussParameters.TabIndex = 3;
+            this.groupBoxGaussParameters.TabStop = false;
+            this.groupBoxGaussParameters.Text = "Параметры генерируемого изображения";
+            // 
+            // groupBoxInputSize
+            // 
+            this.groupBoxInputSize.Controls.Add(this.comboBoxMSize);
+            this.groupBoxInputSize.Controls.Add(this.labelM);
+            this.groupBoxInputSize.Controls.Add(this.comboBoxNSize);
+            this.groupBoxInputSize.Controls.Add(this.labelN);
+            this.groupBoxInputSize.Location = new System.Drawing.Point(6, 19);
+            this.groupBoxInputSize.Name = "groupBoxInputSize";
+            this.groupBoxInputSize.Size = new System.Drawing.Size(201, 67);
+            this.groupBoxInputSize.TabIndex = 0;
+            this.groupBoxInputSize.TabStop = false;
+            this.groupBoxInputSize.Text = "Размер изображения";
+            // 
+            // comboBoxMSize
+            // 
+            this.comboBoxMSize.FormattingEnabled = true;
+            this.comboBoxMSize.Items.AddRange(new object[] {
+            "256",
+            "512",
+            "1024"});
+            this.comboBoxMSize.Location = new System.Drawing.Point(121, 26);
+            this.comboBoxMSize.Name = "comboBoxMSize";
+            this.comboBoxMSize.Size = new System.Drawing.Size(61, 21);
+            this.comboBoxMSize.TabIndex = 3;
+            this.comboBoxMSize.Text = "512";
+            // 
+            // labelM
+            // 
+            this.labelM.AutoSize = true;
+            this.labelM.Location = new System.Drawing.Point(97, 29);
+            this.labelM.Name = "labelM";
+            this.labelM.Size = new System.Drawing.Size(19, 13);
+            this.labelM.TabIndex = 2;
+            this.labelM.Text = "M:";
+            // 
+            // comboBoxNSize
+            // 
+            this.comboBoxNSize.FormattingEnabled = true;
+            this.comboBoxNSize.Items.AddRange(new object[] {
+            "256",
+            "512",
+            "1024"});
+            this.comboBoxNSize.Location = new System.Drawing.Point(30, 26);
+            this.comboBoxNSize.Name = "comboBoxNSize";
+            this.comboBoxNSize.Size = new System.Drawing.Size(61, 21);
+            this.comboBoxNSize.TabIndex = 1;
+            this.comboBoxNSize.Text = "512";
+            // 
+            // labelN
+            // 
+            this.labelN.AutoSize = true;
+            this.labelN.Location = new System.Drawing.Point(6, 29);
+            this.labelN.Name = "labelN";
+            this.labelN.Size = new System.Drawing.Size(18, 13);
+            this.labelN.TabIndex = 0;
+            this.labelN.Text = "N:";
             // 
             // groupBoxGaussDomeParameters
             // 
@@ -169,7 +295,7 @@
             this.numericUpDownSigmaY.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownSigmaY.TabIndex = 6;
             this.numericUpDownSigmaY.Value = new decimal(new int[] {
-            50,
+            30,
             0,
             0,
             0});
@@ -196,7 +322,7 @@
             this.numericUpDownSigmaX.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownSigmaX.TabIndex = 4;
             this.numericUpDownSigmaX.Value = new decimal(new int[] {
-            50,
+            30,
             0,
             0,
             0});
@@ -237,7 +363,7 @@
             this.numericUpDownYShift3.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownYShift3.TabIndex = 5;
             this.numericUpDownYShift3.Value = new decimal(new int[] {
-            200,
+            260,
             0,
             0,
             0});
@@ -263,7 +389,7 @@
             this.numericUpDownXShift3.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownXShift3.TabIndex = 3;
             this.numericUpDownXShift3.Value = new decimal(new int[] {
-            200,
+            320,
             0,
             0,
             0});
@@ -336,7 +462,7 @@
             this.numericUpDownYShift2.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownYShift2.TabIndex = 5;
             this.numericUpDownYShift2.Value = new decimal(new int[] {
-            150,
+            260,
             0,
             0,
             0});
@@ -362,7 +488,7 @@
             this.numericUpDownXShift2.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownXShift2.TabIndex = 3;
             this.numericUpDownXShift2.Value = new decimal(new int[] {
-            150,
+            160,
             0,
             0,
             0});
@@ -435,7 +561,7 @@
             this.numericUpDownYShift1.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownYShift1.TabIndex = 5;
             this.numericUpDownYShift1.Value = new decimal(new int[] {
-            100,
+            160,
             0,
             0,
             0});
@@ -461,7 +587,7 @@
             this.numericUpDownXShift1.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownXShift1.TabIndex = 3;
             this.numericUpDownXShift1.Value = new decimal(new int[] {
-            100,
+            250,
             0,
             0,
             0});
@@ -507,62 +633,16 @@
             this.labelAmplitude1.TabIndex = 0;
             this.labelAmplitude1.Text = "Амплитуда:";
             // 
-            // groupBoxInputSize
+            // checkBoxChoiceImage
             // 
-            this.groupBoxInputSize.Controls.Add(this.comboBoxMSize);
-            this.groupBoxInputSize.Controls.Add(this.labelM);
-            this.groupBoxInputSize.Controls.Add(this.comboBoxNSize);
-            this.groupBoxInputSize.Controls.Add(this.labelN);
-            this.groupBoxInputSize.Location = new System.Drawing.Point(6, 19);
-            this.groupBoxInputSize.Name = "groupBoxInputSize";
-            this.groupBoxInputSize.Size = new System.Drawing.Size(201, 67);
-            this.groupBoxInputSize.TabIndex = 0;
-            this.groupBoxInputSize.TabStop = false;
-            this.groupBoxInputSize.Text = "Размер изображения";
-            // 
-            // comboBoxMSize
-            // 
-            this.comboBoxMSize.FormattingEnabled = true;
-            this.comboBoxMSize.Items.AddRange(new object[] {
-            "256",
-            "512",
-            "1024"});
-            this.comboBoxMSize.Location = new System.Drawing.Point(121, 26);
-            this.comboBoxMSize.Name = "comboBoxMSize";
-            this.comboBoxMSize.Size = new System.Drawing.Size(61, 21);
-            this.comboBoxMSize.TabIndex = 3;
-            this.comboBoxMSize.Text = "512";
-            // 
-            // labelM
-            // 
-            this.labelM.AutoSize = true;
-            this.labelM.Location = new System.Drawing.Point(97, 29);
-            this.labelM.Name = "labelM";
-            this.labelM.Size = new System.Drawing.Size(19, 13);
-            this.labelM.TabIndex = 2;
-            this.labelM.Text = "M:";
-            // 
-            // comboBoxNSize
-            // 
-            this.comboBoxNSize.FormattingEnabled = true;
-            this.comboBoxNSize.Items.AddRange(new object[] {
-            "256",
-            "512",
-            "1024"});
-            this.comboBoxNSize.Location = new System.Drawing.Point(30, 26);
-            this.comboBoxNSize.Name = "comboBoxNSize";
-            this.comboBoxNSize.Size = new System.Drawing.Size(61, 21);
-            this.comboBoxNSize.TabIndex = 1;
-            this.comboBoxNSize.Text = "512";
-            // 
-            // labelN
-            // 
-            this.labelN.AutoSize = true;
-            this.labelN.Location = new System.Drawing.Point(6, 29);
-            this.labelN.Name = "labelN";
-            this.labelN.Size = new System.Drawing.Size(18, 13);
-            this.labelN.TabIndex = 0;
-            this.labelN.Text = "N:";
+            this.checkBoxChoiceImage.AutoSize = true;
+            this.checkBoxChoiceImage.Location = new System.Drawing.Point(245, 19);
+            this.checkBoxChoiceImage.Name = "checkBoxChoiceImage";
+            this.checkBoxChoiceImage.Size = new System.Drawing.Size(149, 17);
+            this.checkBoxChoiceImage.TabIndex = 2;
+            this.checkBoxChoiceImage.Text = "Загрузить изображение";
+            this.checkBoxChoiceImage.UseVisualStyleBackColor = true;
+            this.checkBoxChoiceImage.CheckedChanged += new System.EventHandler(this.checkBoxChoiceImage_CheckedChanged);
             // 
             // groupBoxOutputParameters
             // 
@@ -570,7 +650,7 @@
             this.groupBoxOutputParameters.Controls.Add(this.label3);
             this.groupBoxOutputParameters.Controls.Add(this.textBoxSignalNoiseDelta);
             this.groupBoxOutputParameters.Controls.Add(this.labelSKOSignalNoise);
-            this.groupBoxOutputParameters.Location = new System.Drawing.Point(638, 508);
+            this.groupBoxOutputParameters.Location = new System.Drawing.Point(472, 12);
             this.groupBoxOutputParameters.Name = "groupBoxOutputParameters";
             this.groupBoxOutputParameters.Size = new System.Drawing.Size(348, 86);
             this.groupBoxOutputParameters.TabIndex = 7;
@@ -611,81 +691,70 @@
             this.labelSKOSignalNoise.TabIndex = 0;
             this.labelSKOSignalNoise.Text = "СКО ( исходного сигнала и зашумленного):";
             // 
-            // checkBoxChoiceImage
-            // 
-            this.checkBoxChoiceImage.AutoSize = true;
-            this.checkBoxChoiceImage.Location = new System.Drawing.Point(245, 19);
-            this.checkBoxChoiceImage.Name = "checkBoxChoiceImage";
-            this.checkBoxChoiceImage.Size = new System.Drawing.Size(149, 17);
-            this.checkBoxChoiceImage.TabIndex = 2;
-            this.checkBoxChoiceImage.Text = "Загрузить изображение";
-            this.checkBoxChoiceImage.UseVisualStyleBackColor = true;
-            this.checkBoxChoiceImage.CheckedChanged += new System.EventHandler(this.checkBoxChoiceImage_CheckedChanged);
-            // 
             // openFileDialogLoadImageInput
             // 
             this.openFileDialogLoadImageInput.FileName = "openFileDialog1";
             // 
-            // groupBoxGaussParameters
+            // button_Restart
             // 
-            this.groupBoxGaussParameters.Controls.Add(this.groupBoxInputSize);
-            this.groupBoxGaussParameters.Controls.Add(this.groupBoxGaussDomeParameters);
-            this.groupBoxGaussParameters.Controls.Add(this.button_Draw);
-            this.groupBoxGaussParameters.Location = new System.Drawing.Point(6, 19);
-            this.groupBoxGaussParameters.Name = "groupBoxGaussParameters";
-            this.groupBoxGaussParameters.Size = new System.Drawing.Size(233, 557);
-            this.groupBoxGaussParameters.TabIndex = 3;
-            this.groupBoxGaussParameters.TabStop = false;
-            this.groupBoxGaussParameters.Text = "Параметры генерируемого изображения";
+            this.button_Restart.Location = new System.Drawing.Point(314, 600);
+            this.button_Restart.Name = "button_Restart";
+            this.button_Restart.Size = new System.Drawing.Size(145, 42);
+            this.button_Restart.TabIndex = 8;
+            this.button_Restart.Text = "Начать заново";
+            this.button_Restart.UseVisualStyleBackColor = true;
+            this.button_Restart.Click += new System.EventHandler(this.button_Restart_Click);
             // 
-            // groupBoxHowComplement
+            // label4
             // 
-            this.groupBoxHowComplement.Controls.Add(this.checkBoxBilinearInterpolation);
-            this.groupBoxHowComplement.Controls.Add(this.checkBoxZeroCoplement);
-            this.groupBoxHowComplement.Location = new System.Drawing.Point(245, 42);
-            this.groupBoxHowComplement.Name = "groupBoxHowComplement";
-            this.groupBoxHowComplement.Size = new System.Drawing.Size(200, 71);
-            this.groupBoxHowComplement.TabIndex = 4;
-            this.groupBoxHowComplement.TabStop = false;
-            this.groupBoxHowComplement.Text = "Как дополнить изображение?";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(245, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Энергия шума(%):";
             // 
-            // checkBoxZeroCoplement
+            // numericUpDown_NoiseProcent
             // 
-            this.checkBoxZeroCoplement.AutoSize = true;
-            this.checkBoxZeroCoplement.Location = new System.Drawing.Point(6, 20);
-            this.checkBoxZeroCoplement.Name = "checkBoxZeroCoplement";
-            this.checkBoxZeroCoplement.Size = new System.Drawing.Size(122, 17);
-            this.checkBoxZeroCoplement.TabIndex = 0;
-            this.checkBoxZeroCoplement.Text = "Дополнить нулями";
-            this.checkBoxZeroCoplement.UseVisualStyleBackColor = true;
-            this.checkBoxZeroCoplement.CheckedChanged += new System.EventHandler(this.checkBoxZeroCoplement_CheckedChanged);
+            this.numericUpDown_NoiseProcent.Enabled = false;
+            this.numericUpDown_NoiseProcent.Location = new System.Drawing.Point(398, 118);
+            this.numericUpDown_NoiseProcent.Name = "numericUpDown_NoiseProcent";
+            this.numericUpDown_NoiseProcent.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown_NoiseProcent.TabIndex = 10;
+            this.numericUpDown_NoiseProcent.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
-            // checkBoxBilinearInterpolation
+            // numericUpDownRecoveryProcent
             // 
-            this.checkBoxBilinearInterpolation.AutoSize = true;
-            this.checkBoxBilinearInterpolation.Location = new System.Drawing.Point(6, 43);
-            this.checkBoxBilinearInterpolation.Name = "checkBoxBilinearInterpolation";
-            this.checkBoxBilinearInterpolation.Size = new System.Drawing.Size(161, 17);
-            this.checkBoxBilinearInterpolation.TabIndex = 1;
-            this.checkBoxBilinearInterpolation.Text = "Билинейная интерполяция";
-            this.checkBoxBilinearInterpolation.UseVisualStyleBackColor = true;
-            this.checkBoxBilinearInterpolation.CheckedChanged += new System.EventHandler(this.checkBoxBilinearInterpolation_CheckedChanged);
+            this.numericUpDownRecoveryProcent.Enabled = false;
+            this.numericUpDownRecoveryProcent.Location = new System.Drawing.Point(398, 143);
+            this.numericUpDownRecoveryProcent.Name = "numericUpDownRecoveryProcent";
+            this.numericUpDownRecoveryProcent.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDownRecoveryProcent.TabIndex = 12;
+            this.numericUpDownRecoveryProcent.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
-            // buttonDrawNoisyImage
+            // label5
             // 
-            this.buttonDrawNoisyImage.Location = new System.Drawing.Point(267, 496);
-            this.buttonDrawNoisyImage.Name = "buttonDrawNoisyImage";
-            this.buttonDrawNoisyImage.Size = new System.Drawing.Size(145, 65);
-            this.buttonDrawNoisyImage.TabIndex = 8;
-            this.buttonDrawNoisyImage.Text = "Нарисовать зашумлённое изображение";
-            this.buttonDrawNoisyImage.UseVisualStyleBackColor = true;
-            this.buttonDrawNoisyImage.Click += new System.EventHandler(this.buttonDrawNoisyImage_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(245, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(152, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Энергия восстановления(%):";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 719);
+            this.ClientSize = new System.Drawing.Size(829, 735);
+            this.Controls.Add(this.button_Restart);
             this.Controls.Add(this.groupBoxOutputParameters);
             this.Controls.Add(this.groupBoxInputParameters);
             this.Controls.Add(this.button_Recovery);
@@ -694,6 +763,11 @@
             this.Text = "ННГУ ИТФИ | Обработка изображения двумерным преобразованием Фурье";
             this.groupBoxInputParameters.ResumeLayout(false);
             this.groupBoxInputParameters.PerformLayout();
+            this.groupBoxHowComplement.ResumeLayout(false);
+            this.groupBoxHowComplement.PerformLayout();
+            this.groupBoxGaussParameters.ResumeLayout(false);
+            this.groupBoxInputSize.ResumeLayout(false);
+            this.groupBoxInputSize.PerformLayout();
             this.groupBoxGaussDomeParameters.ResumeLayout(false);
             this.groupBoxGaussDomeParameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSigmaY)).EndInit();
@@ -713,13 +787,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownYShift1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXShift1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAmplitude1)).EndInit();
-            this.groupBoxInputSize.ResumeLayout(false);
-            this.groupBoxInputSize.PerformLayout();
             this.groupBoxOutputParameters.ResumeLayout(false);
             this.groupBoxOutputParameters.PerformLayout();
-            this.groupBoxGaussParameters.ResumeLayout(false);
-            this.groupBoxHowComplement.ResumeLayout(false);
-            this.groupBoxHowComplement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_NoiseProcent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRecoveryProcent)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -772,6 +843,11 @@
         private System.Windows.Forms.CheckBox checkBoxBilinearInterpolation;
         private System.Windows.Forms.CheckBox checkBoxZeroCoplement;
         private System.Windows.Forms.Button buttonDrawNoisyImage;
+        private System.Windows.Forms.Button button_Restart;
+        private System.Windows.Forms.NumericUpDown numericUpDown_NoiseProcent;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownRecoveryProcent;
+        private System.Windows.Forms.Label label5;
     }
 }
 

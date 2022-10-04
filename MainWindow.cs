@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -14,6 +15,8 @@ namespace ImageFiltering
         SpectrImage spectrImage;
 
         LogSpectr logSpectr;
+
+        List<Form> openForms = new List<Form>();
 
         private int[][] _inputPixels;
         private double[][] _noisePixels;
@@ -40,12 +43,15 @@ namespace ImageFiltering
             NoisyImage noisyImage = new NoisyImage(_inputPixels.Length, _inputPixels[0].Length);
             noisyImage.Size = new Size(_inputPixels.Length + 40, _inputPixels[0].Length + 60);
 
-            int[][] noisePixels = ImageGeneration.NoisePicture(_inputPixels, 10, rand);  // 2 параметр - % шума
+            int ProcentNoise = Convert.ToInt32(numericUpDown_NoiseProcent.Value);
+            int[][] noisePixels = ImageGeneration.NoisePicture(_inputPixels, ProcentNoise, rand);  // 2 параметр - % шума
             _noisePixels = Converter.ConvertToDoubleArray2Dim(noisePixels);
 
             textBoxSignalNoiseDelta.Text = DeltaSignalNoise(_inputPixels, noisePixels).ToString("F3");
             noisyImage.FillImage(noisePixels);
             noisyImage.Show();
+            openForms.Add(noisyImage);
+            button_DrawSpectrImage.Enabled = true;
         }
 
         public MainWindow()
@@ -71,6 +77,7 @@ namespace ImageFiltering
                 inp.Size = new Size(N + 40, M + 60);
                 inp.FillImage(_inputPixels);
                 inp.Show();
+                openForms.Add(inp);
             }
         }
 
@@ -84,8 +91,7 @@ namespace ImageFiltering
             float rowRatio = ((float)inputImage[0].Length) / ((float)maxHeight);
             float colRatio = ((float)inputImage.Length) / ((float)maxWidth);
             for (int row = 0; row < maxHeight; row++)
-            {
-                // convert to three dimension data  
+            { 
                 outputImage[row] = new int[maxWidth];
                 double srcRow = ((float)row) * rowRatio;
                 double j = Math.Floor(srcRow);
@@ -125,6 +131,8 @@ namespace ImageFiltering
             inputImage.Size = new Size(N + 40, M + 60);
             inputImage.FillImage(_inputPixels);
             inputImage.Show();
+            openForms.Add(inputImage);
+            checkBoxChoiceImage.Enabled = false;
         }
 
         private double GetLengthForPower2(int length)
@@ -132,6 +140,22 @@ namespace ImageFiltering
             for (double x = 2; ; x *= 2)
                 if (x > length) return x;
         }
+
+        private void button_Restart_Click(object sender, EventArgs e)
+        {
+            foreach(var f in openForms)
+            {
+                f.Close();
+            }
+            buttonDrawNoisyImage.Enabled = false;
+            button_DrawSpectrImage.Enabled = false;
+            button_Recovery.Enabled = false;
+            textBoxSignalNoiseDelta.Text = "";
+            textBoxSignalRecoveryDelta.Text = "";
+            numericUpDown_NoiseProcent.Enabled = false;
+            numericUpDownRecoveryProcent.Enabled = false;
+        }
+
         /// <summary>
         /// Проверка на то что сторона равна по длине степени 2
         /// </summary>
@@ -182,7 +206,6 @@ namespace ImageFiltering
                 groupBoxGaussParameters.Enabled = true;
                 groupBoxHowComplement.Enabled = false;
             }
-
         }
         public static int[][] GetBrightnessArray(Bitmap srcImage)
         {
@@ -226,14 +249,18 @@ namespace ImageFiltering
                         inputImage.FillImage(_inputPixels);
 
                         inputImage.Show();
+                        openForms.Add(inputImage);
                     }
                     catch
                     {
                         DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    finally
+                    {
+                        buttonDrawNoisyImage.Enabled = true;
+                    }
                 }
-
             }
             else
             {
@@ -259,14 +286,12 @@ namespace ImageFiltering
 
         }
 
-
         private void button_Draw_Click(object sender, EventArgs e)
         {
             InitialData();
 
             InputImage inputImage = new InputImage(N, M);
             inputImage.Size = new Size(N + 40, M + 60);
-
 
             generator = new ImageGeneration(1, Sigma_X, Sigma_Y);
 
@@ -279,6 +304,10 @@ namespace ImageFiltering
 
             inputImage.FillImage(_inputPixels);
             inputImage.Show();
+            openForms.Add(inputImage);
+
+            numericUpDown_NoiseProcent.Enabled = true;
+            buttonDrawNoisyImage.Enabled = true;
         }
         private double DeltaSignalNoise(int[][] Signal, int[][] NoiseSignal)
         {
@@ -288,12 +317,6 @@ namespace ImageFiltering
                 for (int j = 0; j < Signal[i].Length; j++)
                 {
                     epsilon += Math.Pow(Signal[i][j] - NoiseSignal[i][j], 2);
-                }
-            }
-            for (int i = 0; i < Signal.Length; i++)
-            {
-                for (int j = 0; j < Signal[i].Length; j++)
-                {
                     epsAssist += Signal[i][j] * Signal[i][j];
                 }
             }
@@ -307,12 +330,6 @@ namespace ImageFiltering
                 for (int j = 0; j < Signal[i].Length; j++)
                 {
                     epsilon += Math.Pow(Signal[i][j] - RecoverySignal[i][j], 2);
-                }
-            }
-            for (int i = 0; i < Signal.Length; i++)
-            {
-                for (int j = 0; j < Signal[i].Length; j++)
-                {
                     epsAssist += Signal[i][j] * Signal[i][j];
                 }
             }
@@ -324,7 +341,7 @@ namespace ImageFiltering
             RecoveryImage recoryImage = new RecoveryImage(N, M);
             recoryImage.Size = new Size(N + 40, M + 60);
 
-            int procentRecovery = 50;
+            int procentRecovery = Convert.ToInt32(numericUpDownRecoveryProcent.Value);
             Complex[][] spectrToRecovery = new Complex[N][];
 
             double Min = Math.Min(N / 2, M / 2);
@@ -362,6 +379,7 @@ namespace ImageFiltering
 
             recoryImage.FillImage(spectr);
             recoryImage.Show();
+            openForms.Add(recoryImage);
 
         }
 
@@ -399,10 +417,14 @@ namespace ImageFiltering
 
             logSpectr.FillImage(logSpectrImagePixels);
             logSpectr.Show();
+            openForms.Add(logSpectr);
 
             spectrImage.FillImage(spectrPixelsToImage);
             spectrImage.Show();
-        }
+            openForms.Add(spectrImage);
 
+            numericUpDownRecoveryProcent.Enabled = true;
+            button_Recovery.Enabled = true;
+        }
     }
 }
