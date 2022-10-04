@@ -78,6 +78,8 @@ namespace ImageFiltering
                 inp.FillImage(_inputPixels);
                 inp.Show();
                 openForms.Add(inp);
+                buttonDrawNoisyImage.Enabled = true;
+                numericUpDown_NoiseProcent.Enabled = true;
             }
         }
 
@@ -91,7 +93,7 @@ namespace ImageFiltering
             float rowRatio = ((float)inputImage[0].Length) / ((float)maxHeight);
             float colRatio = ((float)inputImage.Length) / ((float)maxWidth);
             for (int row = 0; row < maxHeight; row++)
-            { 
+            {
                 outputImage[row] = new int[maxWidth];
                 double srcRow = ((float)row) * rowRatio;
                 double j = Math.Floor(srcRow);
@@ -133,6 +135,8 @@ namespace ImageFiltering
             inputImage.Show();
             openForms.Add(inputImage);
             checkBoxChoiceImage.Enabled = false;
+            buttonDrawNoisyImage.Enabled = true;
+            numericUpDown_NoiseProcent.Enabled = true;
         }
 
         private double GetLengthForPower2(int length)
@@ -143,7 +147,7 @@ namespace ImageFiltering
 
         private void button_Restart_Click(object sender, EventArgs e)
         {
-            foreach(var f in openForms)
+            foreach (var f in openForms)
             {
                 f.Close();
             }
@@ -256,10 +260,6 @@ namespace ImageFiltering
                         DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    finally
-                    {
-                        buttonDrawNoisyImage.Enabled = true;
-                    }
                 }
             }
             else
@@ -300,7 +300,7 @@ namespace ImageFiltering
             int[] ySh = new int[] { YShift1, YShift2, YShift3 };
 
             double[][] pixelInputImage = generator.SumGaussDome(N, M, ampl, xSh, ySh);
-            _inputPixels = Converter.ConvertToIntArray2Dim(pixelInputImage);
+            _inputPixels = Converter.ConvertToIntArray2Dim(pixelInputImage,false);
 
             inputImage.FillImage(_inputPixels);
             inputImage.Show();
@@ -368,13 +368,13 @@ namespace ImageFiltering
                 pixelsSpectr[i] = new double[spectrToRecovery[i].Length];
                 pixelsSpectr[i] = FFT.SpectrumPoints(spectrToRecovery[i]);
             }
-            int[][] spectrPixelsToImage = Converter.ConvertToIntArray2Dim(pixelsSpectr);
+            int[][] spectrPixelsToImage = Converter.ConvertToIntArray2Dim(pixelsSpectr,true);
 
             spectrImage.FillImage(spectrPixelsToImage);
 
             Complex[][] recoveryCompl = FFT.TwoDimensionalTransform(spectrToRecovery, false);
             double[][] pixelRecovery = FFT.RecoveryPoints(recoveryCompl);
-            int[][] spectr = Converter.ConvertToIntArray2Dim(pixelRecovery);
+            int[][] spectr = Converter.ConvertToIntArray2Dim(pixelRecovery,true);
             textBoxSignalRecoveryDelta.Text = DeltaSignalRecovery(_inputPixels, spectr).ToString("F3");
 
             recoryImage.FillImage(spectr);
@@ -411,7 +411,7 @@ namespace ImageFiltering
                 pixelsSpectr[i] = FFT.SpectrumPoints(spectrPixels[i]);
             }
             pixelsSpectr[N / 2][M / 2] = 0;
-            int[][] spectrPixelsToImage = Converter.ConvertToIntArray2Dim(pixelsSpectr);
+            int[][] spectrPixelsToImage = Converter.ConvertToIntArray2Dim(pixelsSpectr,true);
 
             int[][] logSpectrImagePixels = Converter.ConvertToLogIntArray2Dim(pixelsSpectr);
 
